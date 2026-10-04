@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>سیستم لاگین امن + فرهنگ و هنر</title>
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; font-family:Tahoma,sans-serif; }
+  * { margin:0; padding:0; box-sizing:border-box; font-family:Tahoma,sans-serif; -webkit-tap-highlight-color:transparent; }
   body { min-height:100vh; display:flex; justify-content:center; align-items:flex-start;
-         background:linear-gradient(135deg,#0f2027,#203a43,#2c5364); padding:20px; }
+         background:linear-gradient(135deg,#0f2027,#203a43,#2c5364); padding:20px;
+         padding-bottom: 80px; }
   .container { background:#fff; padding:40px 35px; border-radius:15px;
                box-shadow:0 15px 40px rgba(0,0,0,0.5); width:460px; max-width:100%; }
   h2 { text-align:center; color:#1e3c72; margin-bottom:25px; font-size:22px; }
@@ -17,17 +18,13 @@
                        width:100%; padding:12px; border:2px solid #ddd;
                        border-radius:8px; font-size:15px; }
   .input-group input, .input-group textarea { direction:ltr; text-align:left; font-family:monospace; }
-  .input-group select { direction:rtl; font-family:Tahoma; }
-  .input-group textarea { min-height:120px; resize:vertical; font-size:12px; }
-  .input-group input:focus, .input-group textarea:focus, .input-group select:focus {
-                       outline:none; border-color:#2a5298; }
+  .input-group input:focus, .input-group textarea:focus { outline:none; border-color:#2a5298; }
   .btn { width:100%; padding:12px; background:linear-gradient(135deg,#1e3c72,#2a5298);
          color:#fff; border:none; border-radius:8px; font-size:16px; cursor:pointer;
-         margin-top:10px; transition:0.3s; }
+         margin-top:10px; transition:0.3s; font-family:inherit; }
   .btn:hover { transform:translateY(-2px); box-shadow:0 8px 20px rgba(30,60,114,0.4); }
   .btn-green { background:linear-gradient(135deg,#11998e,#38ef7d); }
   .btn-red { background:linear-gradient(135deg,#c0392b,#e74c3c); }
-  .btn-orange { background:linear-gradient(135deg,#f39c12,#e67e22); }
   .btn-purple { background:linear-gradient(135deg,#8e44ad,#9b59b6); }
   .btn-sm { width:auto; padding:6px 12px; font-size:12px; margin:0; }
   .btn-paste { width:auto; padding:0 14px; margin:0; font-size:18px; border-radius:8px;
@@ -89,6 +86,45 @@
   .step-badge { display:inline-block; background:#1e3c72; color:#fff;
                 padding:3px 10px; border-radius:20px; font-size:11px; margin-bottom:10px; }
   .loading { text-align:center; color:#2a5298; font-size:13px; padding:20px; }
+
+  /* ==================== فوتر سازنده ==================== */
+  .creator-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 12px 20px;
+    background: rgba(15, 32, 39, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #fff;
+    font-size: 13px;
+    font-family: Tahoma, sans-serif;
+    border-top: 2px solid rgba(124, 58, 237, 0.4);
+    z-index: 9998;
+    direction: rtl;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+  }
+  .creator-footer .label {
+    opacity: 0.8;
+    margin: 0 4px;
+  }
+  .creator-footer .name {
+    font-weight: bold;
+    background: linear-gradient(135deg, #a78bfa, #7c3aed, #4f46e5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 15px;
+    margin: 0 4px;
+    letter-spacing: 0.5px;
+    animation: creatorGlow 2s ease-in-out infinite;
+  }
+  @keyframes creatorGlow {
+    0%, 100% { filter: drop-shadow(0 0 3px rgba(167, 139, 250, 0.4)); }
+    50% { filter: drop-shadow(0 0 12px rgba(167, 139, 250, 0.9)); }
+  }
 
   /* ==================== هشدار DevTools ==================== */
   .devtools-warning {
@@ -595,7 +631,7 @@
   <p style="font-size:14px;opacity:0.8;margin-top:10px;">سپس صفحه را رفرش کنید.</p>
 </div>
 
-<!-- ============ لودینگ اولیه ============ -->
+<!-- ============ لودینگ ============ -->
 <div class="container" id="loadingPage">
   <div class="loading">⏳ در حال اتصال به سرور...</div>
 </div>
@@ -618,7 +654,7 @@
   </div>
 </div>
 
-<!-- ============ ادمین مرحله ۱ ============ -->
+<!-- ============ ادمین ۱ ============ -->
 <div class="container hidden" id="adminStep1Page">
   <div style="text-align:center;"><span class="step-badge">مرحله ۱ از ۲</span></div>
   <h2>👑 ورود ادمین</h2>
@@ -629,7 +665,7 @@
   <div class="link" onclick="showPage('loginPage')">بازگشت</div>
 </div>
 
-<!-- ============ ادمین مرحله ۲ ============ -->
+<!-- ============ ادمین ۲ ============ -->
 <div class="container hidden" id="adminStep2Page">
   <div style="text-align:center;"><span class="step-badge">مرحله ۲ از ۲</span></div>
   <h2>🔑 Master Password</h2>
@@ -684,7 +720,7 @@
   <div class="link" onclick="showPage('loginPage')">بازگشت</div>
 </div>
 
-<!-- ============ صفحه فرهنگ و هنر (بعد از لاگین) ============ -->
+<!-- ============ صفحه فرهنگ و هنر ============ -->
 <div class="container user-panel hidden" id="culturePage" style="background:transparent;box-shadow:none;padding:0;">
   <div class="culture-bg-effects" aria-hidden="true"></div>
   <div class="culture-glow-orbs" aria-hidden="true">
@@ -725,36 +761,30 @@
       </h1>
 
       <div class="culture-grid">
-        <!-- فرهنگ -->
         <div class="culture-concept culture">
           <div class="culture-icon">🌍</div>
           <h2>فرهنگ <small>چیست؟</small></h2>
-
           <div class="culture-highlight">
             <p>
               <strong>تعریف ساده:</strong>
               نرم‌افزار زندگی و سبک رفتار، ارزش‌ها، باورها و آداب‌ورسوم یک ملت است.
             </p>
           </div>
-
           <ul class="culture-features">
             <li>از نسلی به نسل دیگر منتقل می‌شود.</li>
             <li>راهکار جامعه برای حل نیازهاست.</li>
           </ul>
         </div>
 
-        <!-- هنر -->
         <div class="culture-concept art">
           <div class="culture-icon">🎨</div>
           <h2>هنر <small>چیست؟</small></h2>
-
           <div class="culture-highlight">
             <p>
               <strong>تعریف ساده:</strong>
               بیان خلاقانه احساسات، تخیل و تجربه‌های انسان از طریق ابزارهایی مانند نقاشی، موسیقی، سینما و ادبیات است.
             </p>
           </div>
-
           <ul class="culture-features">
             <li>هنر مهم‌ترین و زنده‌ترین بخش فرهنگ به شمار می‌رود.</li>
             <li>عواطف و معنا را منتقل می‌کند.</li>
@@ -810,7 +840,7 @@
     <div class="section-title">وضعیت امنیتی</div>
     <div class="item" style="border-left-color:#27ae60;">
       <div><div style="font-weight:bold;color:#1e3c72;">☁️ JSONBin Cloud</div>
-      <div style="font-size:12px;color:#666;margin-top:4px;">فقط لاگین و لایسنس روی سرور</div></div>
+      <div style="font-size:12px;color:#666;margin-top:4px;">داده‌ها روی سرور آنلاین</div></div>
       <span class="type unlimited">فعال</span>
     </div>
     <div class="item" style="border-left-color:#27ae60;">
@@ -835,13 +865,19 @@
   </div>
 </div>
 
+<!-- ============ فوتر سازنده ============ -->
+<footer class="creator-footer">
+  <span class="label">✨ طراحی و توسعه</span>
+  <span class="name">ایلیا خداپناه</span>
+  <span class="label">💻</span>
+</footer>
+
 <script>
 /* ============================================================
    🛡️ محافظت از کد
    ============================================================ */
 (function protectCode() {
   function isPasteMode() { return window.__PASTE_MODE__ === true; }
-
   function insidePasteDialog(e) {
     let el = e.target;
     while (el) {
@@ -860,7 +896,6 @@
   document.addEventListener('keydown', e => {
     if (isPasteMode()) return true;
     const key = (e.key || '').toLowerCase();
-
     if (e.key === 'F12' || e.keyCode === 123) { e.preventDefault(); e.stopPropagation(); return false; }
     if (e.ctrlKey && e.shiftKey && ['i','j','c','k'].includes(key)) { e.preventDefault(); e.stopPropagation(); return false; }
     if (e.ctrlKey && key === 'u') { e.preventDefault(); e.stopPropagation(); return false; }
@@ -880,7 +915,6 @@
     if (isPasteMode()) return true;
     e.preventDefault();
   });
-
   document.addEventListener('wheel', e => {
     if (isPasteMode()) return true;
     if (e.ctrlKey) e.preventDefault();
@@ -894,7 +928,6 @@
     const widthDiff  = window.outerWidth  - window.innerWidth;
     const heightDiff = window.outerHeight - window.innerHeight;
     const isOpen = widthDiff > threshold || heightDiff > threshold;
-
     if (isOpen !== devtoolsOpen) {
       devtoolsOpen = isOpen;
       if (warning) warning.classList.toggle('show', isOpen);
@@ -923,7 +956,6 @@ async function pasteLicense() {
       }
     }
   } catch (e) {}
-
   try {
     const input = document.getElementById('regLicense');
     input.focus();
@@ -931,14 +963,12 @@ async function pasteLicense() {
     const ok = document.execCommand('paste');
     if (ok && input.value.trim()) return;
   } catch (e) {}
-
   showPasteDialog();
 }
 
 function showPasteDialog() {
   const old = document.getElementById('pasteDialog');
   if (old) old.remove();
-
   window.__PASTE_MODE__ = true;
 
   const dialog = document.createElement('div');
@@ -958,8 +988,7 @@ function showPasteDialog() {
         📋 چسباندن کد لایسنس
       </h3>
       <p style="font-size:13px; color:#666; text-align:center; margin-bottom:12px; line-height:1.8;">
-        کد لایسنس رو در کادر زیر <b>نگه دار و Paste کن</b><br>
-        (روی موبایل: انگشتت رو داخل کادر نگه دار → Paste)
+        کد لایسنس رو در کادر زیر <b>نگه دار و Paste کن</b>
       </p>
       <textarea id="pasteDialogInput" placeholder="XXXX-XXXX-XXXX-XXXX"
         oncontextmenu="return true;"
@@ -969,7 +998,6 @@ function showPasteDialog() {
                -webkit-user-select:text !important; user-select:text !important;
                -webkit-touch-callout:default !important;
                background:#f9fafb; letter-spacing:1px; outline:none;"></textarea>
-
       <div style="text-align:center; margin-top:8px;">
         <button onclick="tryReadClipboard()" 
           style="width:100%; padding:10px; background:linear-gradient(135deg,#f39c12,#e67e22);
@@ -978,37 +1006,25 @@ function showPasteDialog() {
           📋 خوندن مستقیم از کلیپ‌بورد
         </button>
       </div>
-
       <div style="display:flex; gap:8px; margin-top:12px;">
         <button onclick="confirmPasteDialog()" 
           style="flex:1; padding:12px; background:linear-gradient(135deg,#11998e,#38ef7d);
                  color:#fff; border:none; border-radius:8px; font-size:15px;
-                 cursor:pointer; font-weight:bold;">
-          ✅ تأیید
-        </button>
+                 cursor:pointer; font-weight:bold;">✅ تأیید</button>
         <button onclick="closePasteDialog()" 
           style="flex:1; padding:12px; background:linear-gradient(135deg,#c0392b,#e74c3c);
                  color:#fff; border:none; border-radius:8px; font-size:15px;
-                 cursor:pointer; font-weight:bold;">
-          ✖ لغو
-        </button>
+                 cursor:pointer; font-weight:bold;">✖ لغو</button>
       </div>
     </div>
   `;
-
   document.body.appendChild(dialog);
 
   const ta = document.getElementById('pasteDialogInput');
   if (ta) {
     ['contextmenu', 'mousedown', 'touchstart', 'touchend', 'selectstart', 'longpress', 'pointerdown']
-      .forEach(ev => {
-        ta.addEventListener(ev, e => { e.stopPropagation(); }, true);
-      });
-
-    setTimeout(() => {
-      ta.focus();
-      try { ta.click(); } catch(e) {}
-    }, 150);
+      .forEach(ev => { ta.addEventListener(ev, e => { e.stopPropagation(); }, true); });
+    setTimeout(() => { ta.focus(); try { ta.click(); } catch(e) {} }, 150);
   }
 }
 
@@ -1030,7 +1046,7 @@ function confirmPasteDialog() {
 async function tryReadClipboard() {
   try {
     if (!navigator.clipboard || !navigator.clipboard.readText) {
-      alert('مرورگر تو از خوندن مستقیم کلیپ‌بورد پشتیبانی نمی‌کنه.\nلطفاً کد رو دستی paste کن یا تایپ کن.');
+      alert('مرورگر تو از خوندن مستقیم کلیپ‌بورد پشتیبانی نمی‌کنه.');
       return;
     }
     const text = await navigator.clipboard.readText();
@@ -1040,25 +1056,22 @@ async function tryReadClipboard() {
       alert('کلیپ‌بورد خالیه');
     }
   } catch (e) {
-    alert('مرورگر اجازه نداد. لطفاً کد رو داخل کادر به‌صورت دستی paste کن.');
+    alert('مرورگر اجازه نداد. لطفاً کد رو دستی paste کن.');
   }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   if (IS_MOBILE) {
     const btn = document.getElementById('pasteBtn');
-    if (btn) {
-      btn.textContent = '📝';
-      btn.title = 'چسباندن دستی';
-    }
+    if (btn) { btn.textContent = '📝'; btn.title = 'چسباندن دستی'; }
   }
 });
 
 /* ============================================================
    ⚙️ تنظیمات JSONBin
    ============================================================ */
-const JSONBIN_BIN_ID = '6ab658b5ffd5d160532d9b41';
-const JSONBIN_ACCESS_KEY = '$2a$10$ZKPo3X2psjYHYCAsEEkUIOCF3puu3r5Spqde/1YJOAZCy4FmaBUbq';
+const JSONBIN_BIN_ID = '6ab9d6e8ac6210605afc8ddd';
+const JSONBIN_ACCESS_KEY = '$2a$10$txJZZqUIjGHmVQg.Kn6rseZSS8a/hfJBZ6vQHdVqvnM3qxjLJWckm';
 
 let CURRENT_APP_KEY = null;
 let CURRENT_DATA = null;
@@ -1135,7 +1148,7 @@ async function verifyPassword(password, stored) {
   } catch { return false; }
 }
 
-/* ==================== Fingerprint ==================== */
+/* ==================== HWID ==================== */
 async function getHWID() {
   const parts = [
     navigator.userAgent, navigator.language, navigator.platform,
@@ -1166,7 +1179,7 @@ async function getHWID() {
   return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
 }
 
-/* ==================== JSONBin Cloud ==================== */
+/* ==================== JSONBin ==================== */
 async function cloudLoad() {
   try {
     const res = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`, {
@@ -1224,7 +1237,8 @@ function setMsg(id, text, type) {
   el.className = 'msg ' + (type || '');
 }
 function showPage(id) {
-  ['loadingPage','loginPage','registerPage','culturePage','adminPage','adminStep1Page','adminStep2Page','setupPage']
+  ['loadingPage','loginPage','registerPage','culturePage','adminPage',
+   'adminStep1Page','adminStep2Page','setupPage']
     .forEach(p => {
       const el = document.getElementById(p);
       if (el) el.classList.add('hidden');
@@ -1241,23 +1255,20 @@ function showPage(id) {
 /* ==================== شروع ==================== */
 async function init() {
   showPage('loadingPage');
-
   const data = await loadCloudData();
   if (!data) {
     showPage('loginPage');
     setMsg('loginMsg', '❌ اتصال به سرور برقرار نشد. اینترنت رو چک کن.', 'error');
     return;
   }
-
   if (!data.encAppKey || !data.adminHash) {
     showPage('setupPage');
     return;
   }
-
   showPage('loginPage');
 }
 
-/* ==================== راه‌اندازی اولیه ==================== */
+/* ==================== راه‌اندازی ==================== */
 async function doSetup() {
   const a1 = document.getElementById('setupAdminPass1').value;
   const a2 = document.getElementById('setupAdminPass2').value;
@@ -1283,7 +1294,8 @@ async function doSetup() {
 
     setMsg('setupMsg', '✅ راه‌اندازی موفق!', 'success');
     setTimeout(() => {
-      ['setupAdminPass1','setupAdminPass2','setupMasterPass1','setupMasterPass2'].forEach(id => document.getElementById(id).value = '');
+      ['setupAdminPass1','setupAdminPass2','setupMasterPass1','setupMasterPass2']
+        .forEach(id => document.getElementById(id).value = '');
       setMsg('setupMsg', '', '');
       showPage('loginPage');
     }, 2000);
@@ -1353,7 +1365,6 @@ async function doLogin() {
     } else {
       const userLic = (fresh.licenses || []).find(l => l.code === user.license);
       const licType = userLic?.type || 'single';
-
       if (licType !== 'nohwid') {
         user.hwid = hwid;
         await saveCloudData();
@@ -1364,11 +1375,9 @@ async function doLogin() {
     setMsg('loginMsg', '', '');
     document.getElementById('loginPassword').value = '';
 
-    // نمایش نام کاربر در صفحه فرهنگ و هنر
     const badge = document.getElementById('userBadge');
     if (badge) badge.textContent = '👤 ' + username;
 
-    // مستقیم برو به صفحه فرهنگ و هنر
     showPage('culturePage');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } catch (e) {
@@ -1460,8 +1469,7 @@ async function generateLicense() {
   CLOUD_DATA.licenses = CLOUD_DATA.licenses || [];
   CLOUD_DATA.licenses.push({
     id: Date.now(),
-    code,
-    type,
+    code, type,
     usedByList: [],
     usedBy: null,
     hwid: null,
