@@ -87,45 +87,6 @@
                 padding:3px 10px; border-radius:20px; font-size:11px; margin-bottom:10px; }
   .loading { text-align:center; color:#2a5298; font-size:13px; padding:20px; }
 
-  /* ==================== فوتر سازنده ==================== */
-  .creator-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    text-align: center;
-    padding: 12px 20px;
-    background: rgba(15, 32, 39, 0.92);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    color: #fff;
-    font-size: 13px;
-    font-family: Tahoma, sans-serif;
-    border-top: 2px solid rgba(124, 58, 237, 0.4);
-    z-index: 9998;
-    direction: rtl;
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
-  }
-  .creator-footer .label {
-    opacity: 0.8;
-    margin: 0 4px;
-  }
-  .creator-footer .name {
-    font-weight: bold;
-    background: linear-gradient(135deg, #a78bfa, #7c3aed, #4f46e5);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-size: 15px;
-    margin: 0 4px;
-    letter-spacing: 0.5px;
-    animation: creatorGlow 2s ease-in-out infinite;
-  }
-  @keyframes creatorGlow {
-    0%, 100% { filter: drop-shadow(0 0 3px rgba(167, 139, 250, 0.4)); }
-    50% { filter: drop-shadow(0 0 12px rgba(167, 139, 250, 0.9)); }
-  }
-
   /* ==================== هشدار DevTools ==================== */
   .devtools-warning {
     display: none;
@@ -620,6 +581,144 @@
     0%, 100% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
   }
+
+  /* ==================== فوتر سازنده ==================== */
+  .creator-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 12px 20px;
+    background: rgba(15, 32, 39, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #fff;
+    font-size: 13px;
+    font-family: Tahoma, sans-serif;
+    border-top: 2px solid rgba(124, 58, 237, 0.4);
+    z-index: 9998;
+    direction: rtl;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+  }
+  .creator-footer .label {
+    opacity: 0.8;
+    margin: 0 4px;
+  }
+  .creator-footer .name {
+    font-weight: bold;
+    background: linear-gradient(135deg, #a78bfa, #7c3aed, #4f46e5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 15px;
+    margin: 0 4px;
+    letter-spacing: 0.5px;
+    animation: creatorGlow 2s ease-in-out infinite;
+  }
+  @keyframes creatorGlow {
+    0%, 100% { filter: drop-shadow(0 0 3px rgba(167, 139, 250, 0.4)); }
+    50% { filter: drop-shadow(0 0 12px rgba(167, 139, 250, 0.9)); }
+  }
+
+  /* ============================================================
+     📱 بهینه‌سازی موبایل — جلوگیری از هنگ و لگ
+     ============================================================ */
+  @media (max-width: 768px), (hover: none) and (pointer: coarse) {
+    /* حذف کامل پس‌زمینه‌های سنگین */
+    .culture-bg-effects,
+    .culture-glow-orbs,
+    .culture-particles {
+      display: none !important;
+    }
+
+    /* حذف backdrop-filter که بزرگترین عامل لگ روی موبایله */
+    .culture-card,
+    .culture-concept {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+
+    .culture-card {
+      background: rgba(45, 27, 78, 0.88) !important;
+      animation: none !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+    }
+
+    .culture-concept {
+      background: rgba(45, 27, 78, 0.75) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+    }
+
+    /* حذف انیمیشن‌های داخل کارت */
+    .culture-concept::before,
+    .culture-highlight::before {
+      display: none !important;
+    }
+
+    .culture-icon,
+    .culture-card::before,
+    .culture-card::after,
+    .culture-title span,
+    .culture-quote span,
+    .creator-footer .name {
+      animation: none !important;
+      filter: none !important;
+      -webkit-filter: none !important;
+    }
+
+    .culture-concept:hover {
+      transform: none !important;
+    }
+
+    /* پس‌زمینه‌ی کل body روی موبایل — گرادیانت ساده */
+    body.culture-active {
+      animation: none !important;
+      background: linear-gradient(135deg, #1a0f2e 0%, #2d1b4e 50%, #4a2c5e 100%) !important;
+      background-size: auto !important;
+    }
+
+    /* فوتر روی موبایل */
+    .creator-footer {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      background: #0f2027 !important;
+    }
+
+    /* حذف hover effect روی لمس */
+    .culture-features li:hover {
+      transform: none !important;
+      padding-right: 1.2rem !important;
+    }
+
+    /* کاهش سایه‌های سنگین */
+    .container {
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4) !important;
+    }
+  }
+
+  /* برای گوشی‌های بسیار ضعیف — حذف همه‌ی انیمیشن‌ها */
+  @media (max-width: 400px) {
+    .btn:hover {
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    .culture-highlight p strong {
+      box-shadow: none !important;
+    }
+  }
+
+  /* کاهش انیمیشن برای کاربرانی که ترجیح می‌دهند */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 </style>
 </head>
 <body>
@@ -747,7 +846,7 @@
   </div>
 
   <div class="culture-page-container">
-    <div class="header" style="background:rgba(255,255,255,0.08);backdrop-filter:blur(10px);border-radius:15px;padding:12px 18px;margin-bottom:20px;border:1px solid rgba(255,220,200,0.25);">
+    <div class="header" style="background:rgba(255,255,255,0.08);border-radius:15px;padding:12px 18px;margin-bottom:20px;border:1px solid rgba(255,220,200,0.25);">
       <h2 style="color:#fff8f0;margin:0;font-size:18px;">🎭 فرهنگ و هنر</h2>
       <div style="display:flex; gap:8px; align-items:center;">
         <span id="userBadge" style="color:#ffe8d8;font-size:13px;background:rgba(255,180,220,0.15);padding:5px 12px;border-radius:20px;"></span>
@@ -867,12 +966,25 @@
 
 <!-- ============ فوتر سازنده ============ -->
 <footer class="creator-footer">
-  <span class="label">✨ طراحی و توسعه</span>
+  <span class="label">✨ طراحی و توسعه توسط</span>
   <span class="name">ایلیا خداپناه</span>
   <span class="label">💻</span>
 </footer>
 
 <script>
+/* ============================================================
+   📱 تشخیص موبایل برای بهینه‌سازی
+   ============================================================ */
+const IS_MOBILE_DEVICE =
+  /Android|iPhone|iPad|iPod|Mobile|Opera Mini/i.test(navigator.userAgent) ||
+  (navigator.maxTouchPoints > 1 && window.innerWidth < 1024);
+
+if (IS_MOBILE_DEVICE) {
+  document.documentElement.classList.add('mobile-device');
+  // غیرفعال کردن smooth scroll که روی گوشی سنگینه
+  document.documentElement.style.scrollBehavior = 'auto';
+}
+
 /* ============================================================
    🛡️ محافظت از کد
    ============================================================ */
@@ -920,22 +1032,25 @@
     if (e.ctrlKey) e.preventDefault();
   }, { passive: false });
 
-  let devtoolsOpen = false;
-  const warning = document.getElementById('devtoolsWarning');
+  // چک کردن DevTools فقط روی دسکتاپ
+  if (!IS_MOBILE_DEVICE) {
+    let devtoolsOpen = false;
+    const warning = document.getElementById('devtoolsWarning');
 
-  function checkDevTools() {
-    const threshold = 160;
-    const widthDiff  = window.outerWidth  - window.innerWidth;
-    const heightDiff = window.outerHeight - window.innerHeight;
-    const isOpen = widthDiff > threshold || heightDiff > threshold;
-    if (isOpen !== devtoolsOpen) {
-      devtoolsOpen = isOpen;
-      if (warning) warning.classList.toggle('show', isOpen);
-      document.body.style.overflow = isOpen ? 'hidden' : '';
+    function checkDevTools() {
+      const threshold = 160;
+      const widthDiff  = window.outerWidth  - window.innerWidth;
+      const heightDiff = window.outerHeight - window.innerHeight;
+      const isOpen = widthDiff > threshold || heightDiff > threshold;
+      if (isOpen !== devtoolsOpen) {
+        devtoolsOpen = isOpen;
+        if (warning) warning.classList.toggle('show', isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      }
     }
+    setInterval(checkDevTools, 1500);
+    setInterval(() => { try { if (devtoolsOpen) console.clear(); } catch (e) {} }, 1500);
   }
-  setInterval(checkDevTools, 1000);
-  setInterval(() => { try { if (devtoolsOpen) console.clear(); } catch (e) {} }, 1000);
 
   console.log('%c⛔ توقف!', 'color:red;font-size:40px;font-weight:bold;');
   console.log('%cاین کنسول برای توسعه‌دهنده‌هاست.', 'color:red;font-size:16px;');
@@ -1379,7 +1494,7 @@ async function doLogin() {
     if (badge) badge.textContent = '👤 ' + username;
 
     showPage('culturePage');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'auto' });
   } catch (e) {
     setMsg('loginMsg', '❌ خطا', 'error');
   }
